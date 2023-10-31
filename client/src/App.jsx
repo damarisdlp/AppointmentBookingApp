@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Booking from "./pages/Booking";
+import Account from "./pages/Account";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -38,6 +39,8 @@ function App() {
             element={user ? <Booking /> : <Navigate to="/login" />}
           />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/account" element={<Account />} />
+
         </Routes>
       </main>
       <Footer />

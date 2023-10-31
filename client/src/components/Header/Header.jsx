@@ -83,7 +83,7 @@ const Header = ({ user, onLogout }) => {
               ))}
               {user ? (
                 <li>
-                  <Link to="/booking"> My Account </Link>
+                  <Link to="/account"> My Account </Link>
                 </li>
               ) : null}
             </ul>
