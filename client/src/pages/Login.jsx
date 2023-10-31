@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { Link } from 'react-router-dom'
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -10,6 +10,15 @@ const Login = () => {
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    // Perform client-side authentication here (mocking authentication).
+    if (formData.email === 'user@gmail.com' && formData.password === 'password') {
+      onLogin(formData.email);
+    } else {
+      alert('Invalid credentials');
+    }
   };
   return (
     <section className="px-5 lg:px-0">
@@ -52,6 +61,7 @@ const Login = () => {
           <div className="mt-7">
             <button 
             type="submit"
+            onClick={handleSubmit}
             className="w-full bg-primaryColor text-white text-[18px] leading-[30px] rounded-lg px-4 py-3 ">
               Login
             </button>

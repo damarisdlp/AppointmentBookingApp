@@ -11,7 +11,7 @@ const Contact = () => {
             Feel free to call any of our locations below for answers to any
             question regarding our services.
           </p>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[15px] text-center">
             <div>
               <h3 className="font-bold text-[20px]"> Zona Rio Location</h3>
               <p>Address:</p>

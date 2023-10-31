@@ -1,8 +1,49 @@
-import "./app.css";
-import Layout from "./layout/Layout";
+import React, { useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom"; // Import Navigate
+
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
+import Home from "./pages/Home";
+import Services from "./pages/Services";
+import Contact from "./pages/Contact";
+import Booking from "./pages/Booking";
 
 function App() {
-  return <Layout />;
+  const [user, setUser] = useState(null);
+
+  const handleLogin = (username) => {
+    setUser(username);
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+  };
+
+  return (
+    <>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route
+            path="/login"
+            element={user ? <Navigate to="/home" /> : <Login onLogin={handleLogin} />}
+          />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/services" element={<Services />} />
+          <Route
+            path="/booking"
+            element={user ? <Booking /> : <Navigate to="/login" />}
+          />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+      <Footer />
+    </>
+  );
 }
 
 export default App;
