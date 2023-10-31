@@ -19,6 +19,8 @@ function App() {
 
   const handleLogout = () => {
     setUser(null);
+    // Redirect to the home page after logout
+    return <Navigate to="/home" />;
   };
 
   return (
@@ -39,8 +41,10 @@ function App() {
             element={user ? <Booking /> : <Navigate to="/login" />}
           />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/account" element={<Account />} />
-
+          <Route
+            path="/account"
+            element={user ? <Account /> : <Navigate to="/login" />} // Only accessible when logged in
+          />
         </Routes>
       </main>
       <Footer />
