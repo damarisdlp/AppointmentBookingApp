@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom"; // Import Navigate
-
+import { Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login";
@@ -23,17 +22,17 @@ function App() {
 
   return (
     <>
-      <Header />
+      <Header user={user} onLogout={handleLogout} />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/services" element={<Services />} />
           <Route
             path="/login"
             element={user ? <Navigate to="/home" /> : <Login onLogin={handleLogin} />}
           />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/services" element={<Services />} />
           <Route
             path="/booking"
             element={user ? <Booking /> : <Navigate to="/login" />}

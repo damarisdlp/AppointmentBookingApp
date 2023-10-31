@@ -23,7 +23,7 @@ const navLinks = [
     display: "Contact",
   },
 ];
-const Header = () => {
+const Header = ({ user, onLogout }) => {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
 
@@ -51,7 +51,10 @@ const Header = () => {
   const toggleMenu = () => menuRef.current.classList.toggle("show_menu");
 
   return (
-    <header className="header h-[75px] flex items-center sticky_header " ref={headerRef}>
+    <header
+      className="header h-[75px] flex items-center sticky_header "
+      ref={headerRef}
+    >
       <div className="container">
         <div className="flex items-center justify-between">
           {/* ========= logo ========== */}
@@ -68,7 +71,7 @@ const Header = () => {
                 <li key={index}>
                   <NavLink
                     to={link.path}
-                    className={navClass =>
+                    className={(navClass) =>
                       navClass.isActive
                         ? "text-primaryColor text-[16px] leading-7 font-[600]"
                         : "text-textColor text-[16px] leading-7 font-[500] hover:text-primaryColor"
@@ -78,27 +81,48 @@ const Header = () => {
                   </NavLink>
                 </li>
               ))}
+              {user ? (
+                <li>
+                  <Link to="/booking"> My Account </Link>
+                </li>
+              ) : null}
             </ul>
           </div>
 
           {/* ========= nav right ========== */}
           <div className="flex items-center gap-4">
-            <div className="hidden">
-              <Link to="/">
-                <figure className="w-[40px] h-[40px] rounded-full cursor-pointer">
-                  <img src={usrImg} className="w-full rounded-full" alt="user" />
-                </figure>
-              </Link>
-            </div>
+            {user ? (
+              <div>
+                <Link to="/">
+                  <figure className="w-[40px] h-[40px] rounded-full cursor-pointer">
+                    <img
+                      src={usrImg}
+                      className="w-full rounded-full"
+                      alt="user"
+                    />
+                  </figure>
+                </Link>
+              </div>
+            ) : null}
 
-            <Link to="/login">
+            {user ? (
               <button
+                onClick={onLogout}
                 className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] 
                flex-items-center justify-center rounded-[50px]"
               >
-                Login
+                Logout
               </button>
-            </Link>
+            ) : (
+              <Link to="/login">
+                <button
+                  className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] 
+               flex-items-center justify-center rounded-[50px]"
+                >
+                  Login
+                </button>
+              </Link>
+            )}
 
             <span className="md:hidden" onClick={toggleMenu}>
               <BiMenu className="w-6 h-6 cursor-pointer" />
