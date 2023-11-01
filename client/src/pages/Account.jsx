@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { mockAppointments } from "../mockData";
 
 const Account = ({ user, onUpdateUser }) => {
   const [editMode, setEditMode] = useState(false);
@@ -30,10 +31,15 @@ const Account = ({ user, onUpdateUser }) => {
     setDisplayMode("paymentDetails");
   };
 
+  // Filter appointments for the logged-in user
+  const userAppointments = mockAppointments.filter(
+    (appointment) => appointment.userId === user.id
+  );
+
   return (
     <section className="hero_section pt-[60px] 2xl:h-[800px]">
       <div className="container">
-        <div className="px-4 mx-auto max-w-screen-md ">
+        <div className="px-4 mx-auto max-w-screen-md">
           <h2 className="heading text-center">Profile Information</h2>
           <div className="grid grid-cols-1 lg:grid-cols-custom gap-[40px] ">
             <div className="lg:w-[175px]">
@@ -73,6 +79,7 @@ const Account = ({ user, onUpdateUser }) => {
               {displayMode === "userProfile" ? (
                 <>
                   <br />
+                  {/* User profile input fields */}
                   <p>First Name</p>
                   <input
                     placeholder={user.firstName}
@@ -134,7 +141,27 @@ const Account = ({ user, onUpdateUser }) => {
               ) : displayMode === "appointments" ? (
                 <div>
                   <br />
-                  <p>No Appointments</p>
+                  {userAppointments.length > 0 ? (
+                    // Display appointments if the user has any
+                    <ul>
+                      {userAppointments.map((appointment) => (
+                        <div>
+                          <li className="border-[2px] py-4 px-4 font-[400] w-full rounded-[15px]" 
+                          key={appointment.id}>
+                            <p>Date: {appointment.date}</p>
+                            <p>Time: {appointment.time}</p>
+                            <p>Location: {appointment.location}</p>
+                            <p>Service: {appointment.service}</p>
+                            <p>Specialist: {appointment.specialist}</p>
+                          </li>
+                          <br />
+                        </div>
+                      ))}
+                    </ul>
+                  ) : (
+                    // Display "No Appointments" if the user has no appointments
+                    <p>No Appointments</p>
+                  )}
                 </div>
               ) : displayMode === "paymentDetails" ? (
                 <div>
