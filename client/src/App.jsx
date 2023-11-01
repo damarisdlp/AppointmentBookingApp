@@ -9,7 +9,7 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Booking from "./pages/Booking";
 import Account from "./pages/Account";
-import mockUsers from "./mockData";
+import { mockUsers } from "./mockData";
 
 function App() {
   const [user, setUser] = useState(null);

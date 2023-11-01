@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import mockUsers from "../mockData";
+import { mockUsers } from "../mockData"; // Import mockUsers as a named export
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -12,9 +12,7 @@ const Login = ({ onLogin }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   
-
   const handleSubmit = () => {
-
     const authenticatedUser = mockUsers.find(
       (user) =>
         user.email === formData.email && user.password === formData.password
@@ -22,7 +20,7 @@ const Login = ({ onLogin }) => {
 
     if (authenticatedUser) {
       onLogin(authenticatedUser);
-      console.log(authenticatedUser)
+      console.log(authenticatedUser);
     } else {
       alert("Invalid credentials");
     }
