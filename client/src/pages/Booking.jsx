@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { subDays } from "date-fns"; // Import subDays function
 
-const Booking = () => {
+const Booking = ({ user, onUpdateUser }) => {
   const [selectedLocationValue, setSelectedLocationValue] = useState("");
   const [selectedServiceValue, setSelectedServiceValue] = useState("");
   const [selectedSpecialistValue, setSelectedSpecialistValue] = useState("");
@@ -270,7 +270,7 @@ const Booking = () => {
           {appointmentConfirmed && (
             <div className="mt-4">
               <p>
-                Your appointment at {appointmentData.location} for{" "}
+                Hi {user.firstName}, your appointment at {appointmentData.location} for{" "}
                 {appointmentData.service} with {appointmentData.specialist} for{" "}
                 {appointmentData.date} at {appointmentData.time} has been
                 confirmed.

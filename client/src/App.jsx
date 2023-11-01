@@ -48,7 +48,13 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route
             path="/booking"
-            element={user ? <Booking /> : <Navigate to="/login" />}
+            element={
+              user ? (
+                <Booking user={user} onUpdateUser={handleUpdateUser} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
           <Route path="/contact" element={<Contact />} />
           <Route
