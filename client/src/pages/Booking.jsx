@@ -9,7 +9,6 @@ const Booking = () => {
   const [selectedSpecialistValue, setSelectedSpecialistValue] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [selectedTimeValue, setSelectedTimeValue] = useState("");
-  const [specialistAvailability, setSpecialistAvailability] = useState({});
   const [showDateTime, setShowDateTime] = useState(false);
   const [appointmentConfirmed, setAppointmentConfirmed] = useState(false);
 

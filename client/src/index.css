@@ -35,7 +35,13 @@
     appearance: none;
     background: transparent;
     background-image: none;
-  }  
+  }
+  
+  .vertical-buttons {
+    display: flex;
+    flex-direction: column; /* Arrange the buttons vertically */
+    gap: 10px; /* Add some spacing between buttons */
+  }
 
   section {
     @apply bg-no-repeat bg-center bg-cover;

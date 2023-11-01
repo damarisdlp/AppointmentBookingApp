@@ -15,6 +15,9 @@ export default {
       boxShadow: {
         panelShadow: "rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;",
       },
+      gridTemplateColumns: {
+        custom: "1fr 0.5fr",
+      },
     },
   },
   plugins: [],

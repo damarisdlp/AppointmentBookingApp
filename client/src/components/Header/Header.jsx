@@ -48,7 +48,10 @@ const Header = ({ user, onLogout }) => {
     return () => window.removeEventListener("scroll", handleStickyHeader);
   }, []);
 
-  const toggleMenu = () => menuRef.current.classList.toggle("show_menu");
+  const toggleMenu = () => {
+    const menu = menuRef.current;
+    menu.classList.toggle("show_menu");
+  };
 
   return (
     <header
@@ -92,7 +95,7 @@ const Header = ({ user, onLogout }) => {
           {/* ========= nav right ========== */}
           <div className="flex items-center gap-4">
             {user ? (
-              <div>
+              <div className="hidden">
                 <Link to="/">
                   <figure className="w-[40px] h-[40px] rounded-full cursor-pointer">
                     <img
@@ -106,22 +109,22 @@ const Header = ({ user, onLogout }) => {
             ) : null}
 
             {user ? (
-              <button
-                onClick={onLogout}
-                className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] 
-               flex-items-center justify-center rounded-[50px]"
-              >
-                Logout
-              </button>
-            ) : (
-              <Link to="/login">
                 <button
+                  onClick={onLogout}
                   className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] 
                flex-items-center justify-center rounded-[50px]"
                 >
-                  Login
+                  Logout
                 </button>
-              </Link>
+            ) : (
+                <Link to="/login">
+                  <button
+                    className="bg-primaryColor py-2 px-6 text-white font-[600] h-[44px] 
+               flex-items-center justify-center rounded-[50px]"
+                  >
+                    Login
+                  </button>
+                </Link>
             )}
 
             <span className="md:hidden" onClick={toggleMenu}>
