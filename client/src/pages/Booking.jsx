@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { subDays } from "date-fns"; // Import subDays function
 
 const Booking = () => {
   const [selectedLocationValue, setSelectedLocationValue] = useState("");
@@ -70,9 +71,9 @@ const Booking = () => {
 
     if (selectedLocationValue === "5 y 10" && day === 6) {
       endHour = 15; // Saturdays in "5 y 10" are from 9 AM to 3 PM
-    } else if (selectedLocationValue === "Zona Rio" && day === 6 ) {
+    } else if (selectedLocationValue === "Zona Rio" && day === 6) {
       endHour = 16; // Saturdays in "Zona Rio" are from 9 AM to 4 PM
-    } else if (selectedLocationValue === "Zona Rio" && day === 0 ) {
+    } else if (selectedLocationValue === "Zona Rio" && day === 0) {
       endHour = 16; // Sundays in "Zona Rio" are from 9 AM to 4 PM
     }
 
@@ -148,6 +149,12 @@ const Booking = () => {
     }
     return true; // For other locations, allow all days
   };
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // Set the time to the beginning of today
+  
+  // Calculate the minimum date (today or later)
+  const minDate = today;
 
   return (
     <section className="hero_section pt-[60px] 2xl:h-[800px]">
@@ -227,7 +234,8 @@ const Booking = () => {
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
                     dateFormat="EEEE, MMMM d, yyyy"
-                    filterDate={filterWeekdays} // Apply date filter
+                    filterDate={filterWeekdays}
+                    minDate={minDate}
                   />
                   <br />
                   <br />

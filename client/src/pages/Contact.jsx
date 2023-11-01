@@ -22,6 +22,8 @@ const Contact = () => {
                 Blvrd Gral Rodolfo Sánchez Taboada, Zona Río, 22010 Tijuana,
                 B.C., Mexico
               </Link>
+              <br/>
+              <br />
               <p>Hours: </p>
               <p>Mon-Fri: 9AM - 7PM </p>
               <p> Sat-Sun: 9AM - 4PM</p>
@@ -43,6 +45,8 @@ const Contact = () => {
                 Blvd. Gustavo Díaz Ordaz 838, Guillen, 22106 Tijuana, B.C.,
                 Mexico
               </Link>
+              <br/>
+              <br />
               <p>Hours: </p>
               <p>Mon-Fri: 9AM - 7PM </p>
               <p> Sat: 9AM - 3PM</p>
