@@ -1,30 +1,41 @@
 import React, { useState } from "react";
-import usrImg from "../assets/images/avatar.png";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [previewURL, setPreviewURL] = useState("");
-
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    username: "",
     password: "",
-    photo: selectedFile,
   });
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleFileInputChange = async (event) => {
-    const file = event.target.files[0];
+  const submitHandler = (event) => {
+    event.preventDefault();
 
-    console.log(file);
+    // Log the form data to the console
+    console.log("Form Data:", formData);
+
+    // Example fetch request:
+    // fetch('/your-registration-endpoint', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(formData),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     // Handle the registration response from the server
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error:", error);
+    //   });
   };
-
-  const submitHandler = async (event) => event.preventDefault();
 
   return (
     <section className="px-5 xl:px-0">
@@ -81,6 +92,20 @@ const SignUp = () => {
               <div className="mb-5">
                 <input
                   type="text"
+                  placeholder="Username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                  className="w-full py-3 border-b border-solid border-[#0066ff61] 
+              focus:outline-none
+              focus:border-b-primaryColor text-[16px] leading-7 text-headingColor
+              placeholder: text-textColor rounded-md cursor-pointer"
+                  required
+                />
+              </div>
+              <div className="mb-5">
+                <input
+                  type="password"
                   placeholder="Password"
                   name="password"
                   value={formData.password}
@@ -91,30 +116,6 @@ const SignUp = () => {
               placeholder: text-textColor rounded-md cursor-pointer"
                   required
                 />
-              </div>
-              <div className="mb-5 flex items-center gap-3">
-                <figure className="w-[60px] h-[60px] rounded-full border-1 border-solid border-primaryColor flex items-center justify-center">
-                  <img src={usrImg} alt="" className="w-full rounded-full" />
-                </figure>
-
-                <div className="relative w-[160px] h-[50px]">
-                  <input
-                    type="file"
-                    name="photo"
-                    id="customFile"
-                    onChange={handleFileInputChange}
-                    accept=".jpg, .png"
-                    className="absolute w-full h-full opacity-0"
-                  />
-                  <label
-                    htmlFor="customFile"
-                    className="  w-full h-full flex items-center
-              px-[0.75rem] text-[15px] text-headingColor 
-              font-semibold rounded-lg"
-                  >
-                    Upload Photo
-                  </label>
-                </div>
               </div>
 
               <div className="mt-7">
@@ -128,10 +129,7 @@ const SignUp = () => {
 
               <p className="mt-5 text-textColor text-center">
                 Already have an account?
-                <Link
-                  to="/login"
-                  className="text-primaryColor font-medium ml-1"
-                >
+                <Link to="/login" className="text-primaryColor font-medium ml-1">
                   Login
                 </Link>
               </p>
