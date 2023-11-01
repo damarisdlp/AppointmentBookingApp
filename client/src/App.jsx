@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Login from "./pages/Login";
@@ -9,18 +9,26 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Booking from "./pages/Booking";
 import Account from "./pages/Account";
+import mockUsers from "./mockData";
 
 function App() {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-  const handleLogin = (username) => {
-    setUser(username);
+  const handleLogin = (authenticatedUser) => {
+    setUser(authenticatedUser);
   };
 
   const handleLogout = () => {
     setUser(null);
-    // Redirect to the home page after logout
-    return <Navigate to="/home" />;
+    navigate("/home");
+  };
+
+  const handleUpdateUser = (editedUser) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      ...editedUser,
+    }));
   };
 
   return (
@@ -33,7 +41,9 @@ function App() {
           <Route path="/services" element={<Services />} />
           <Route
             path="/login"
-            element={user ? <Navigate to="/home" /> : <Login onLogin={handleLogin} />}
+            element={
+              user ? <Navigate to="/home" /> : <Login onLogin={handleLogin} />
+            }
           />
           <Route path="/signup" element={<SignUp />} />
           <Route
@@ -43,7 +53,13 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route
             path="/account"
-            element={user ? <Account /> : <Navigate to="/login" />} // Only accessible when logged in
+            element={
+              user ? (
+                <Account user={user} onUpdateUser={handleUpdateUser} />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
           />
         </Routes>
       </main>
