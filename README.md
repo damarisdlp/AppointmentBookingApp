@@ -9,3 +9,7 @@ A user-friendly front-end interface for a clinic application, simplifying patien
    npm install
 3. Start the development server:
    npm run dev
+
+## Live Demo
+[![AppointmentBookingApp Demo](https://img.youtube.com/vi/f0QKi-wGRZM/0.jpg)](https://youtu.be/f0QKi-wGRZM)
+
